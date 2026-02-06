@@ -22,12 +22,20 @@
     }
     button.ai-suggestion-btn {
       margin-top: 0;
-      background: #111827;
+      background: #6b7280; /* default: OFF (gray) */
       color: #fff;
-      border: 1px solid #0f172a;
+      border: 1px solid #4b5563;
     }
     button.ai-suggestion-btn:active {
       filter: brightness(0.92);
+    }
+    button.ai-suggestion-btn.is-on {
+      background: #ec4899; /* pink when AI suggestion is visible */
+      border-color: #be185d;
+    }
+    button.ai-suggestion-btn.is-off {
+      background: #6b7280; /* gray when AI suggestion is hidden */
+      border-color: #4b5563;
     }
     .hidden {
       display: none;
@@ -385,8 +393,17 @@
     <h2>Task Information -- Example</h2>
     <div id="taskInfo1Desc" style="margin-bottom:16px;">
       <p>
-        In the next part, you will inspect X-ray images of luggage on a canvas. You can zoom, drag to pan,
-        and use the pen/eraser to mark areas while you decide whether a dangerous item is present.
+        In the following tasks, you will inspect X-ray images of luggage on a canvas. Here's the suggestion about the dangerous item you need to pay attention to:
+      </p>
+
+      <img
+        src="img/securitycheck.png"
+        alt="Security check example"
+        style="display:block; max-width:100%; height:auto; margin:12px 0; border:1px solid #ddd; border-radius:8px;"
+      >
+
+      <p style="margin-top:10px;">
+        You can zoom, drag to pan, and use the pen/eraser to mark areas while you decide whether a dangerous item is present.
         <br><br>
         The following two pages demonstrate the tools you can use during the task.
         <br><br>
@@ -422,8 +439,8 @@
     <h2>Task Information -- Example</h2>
     <div id="taskInfo2Desc" style="margin-bottom:16px;">
       <p>
-        On each trial, you will have access to an AI suggestion. Press and hold the button to reveal the AI
-        overlay; release it to return to the original image. You can still use the same tools.
+        On each trial, the AI suggestion is shown by default. Click the button to toggle the AI suggestion
+        on/off (pink = showing AI suggestion; gray = no AI suggestion). You can still use the same tools.
         <br><br>
         Remind: the AI is not always correct.
       </p>
@@ -433,7 +450,7 @@
     </div>
 
     <div style="display:flex; justify-content:flex-start; margin-bottom:10px;">
-      <button id="aiSuggestionBtnInfo2" class="ai-suggestion-btn">AI Suggestion (Hold)</button>
+      <button id="aiSuggestionBtnInfo2" class="ai-suggestion-btn">AI Suggestion (Toggle)</button>
     </div>
 
     <div style="display:flex; gap:20px;">
@@ -466,7 +483,7 @@
 
     <div style="display:flex; justify-content:flex-start; margin-bottom:10px;">
       <button id="aiSuggestionBtn" class="ai-suggestion-btn" style="display:none;">
-        AI Suggestion (Hold)
+        AI Suggestion (Toggle)
       </button>
     </div>
 
@@ -496,7 +513,59 @@
     </div>
 
     <br>
+
+    <div style="margin-top:10px;">
+      <label for="confidenceTask">How confident are you that your final answer is correct?</label>
+      <div style="display:flex; align-items:center; gap:10px; margin-top:6px;">
+        <input
+          type="number"
+          id="confidenceNumberTask"
+          name="confidenceNumberTask"
+          min="0"
+          max="100"
+          step="1"
+          value="50"
+          style="width:72px;"
+        />
+        <input type="range" id="confidenceTask" name="confidenceTask" min="0" max="100" value="50" style="flex:1;">
+        <span id="confidenceValueTask">50%</span>
+      </div>
+    </div>
+
+    <br>
     <button id="nextTaskBtn" disabled>Next</button>
+  </div>
+
+  <!-- Post-task Questions -->
+  <div id="postTask" class="hidden">
+    <h2>Post-task Questions</h2>
+
+    <div style="margin-bottom:14px;">
+      <label for="postQ1">
+        <strong>1.</strong> In your own words, can you describe how you approached the task when making your decision?
+        <em>(For example, what information you relied on, what you chose to check or not check, and why.)</em>
+        <span style="color:#b91c1c;">*</span>
+      </label>
+      <br />
+      <textarea id="postQ1" rows="5" style="width:100%; margin-top:6px;"></textarea>
+    </div>
+
+    <div style="margin-bottom:14px;">
+      <label for="postQ2">
+        <strong>2.</strong> What factors most influenced how confident or uncertain you felt about your final answers during the task?
+        <span style="color:#b91c1c;">*</span>
+      </label>
+      <br />
+      <textarea id="postQ2" rows="4" style="width:100%; margin-top:6px;"></textarea>
+    </div>
+
+    <div style="margin-bottom:14px;">
+      <label for="postQ3"><strong>3.</strong> Any other comments?</label>
+      <br />
+      <textarea id="postQ3" rows="3" style="width:100%; margin-top:6px;"></textarea>
+    </div>
+
+    <button id="submitPostTaskBtn" disabled>Submit</button>
   </div>
 
   
