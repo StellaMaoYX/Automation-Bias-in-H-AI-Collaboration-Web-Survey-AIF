@@ -17,13 +17,12 @@ import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/1
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyBFqVgFam7BFeHM00K3m0EwCkWacPNDux8",
-  authDomain: "abinhaic.firebaseapp.com",
-  projectId: "abinhaic",
-  storageBucket: "abinhaic.firebasestorage.app",
-  messagingSenderId: "217553128810",
-  appId: "1:217553128810:web:9c2101c16668714502a913",
-  measurementId: "G-MVW2ZF2G7C"
+  apiKey: "AIzaSyAvUhQD_twaqtWpaCAYImP4Sp-iw4K0XAM",
+  authDomain: "abinhaic-aif.firebaseapp.com",
+  projectId: "abinhaic-aif",
+  storageBucket: "abinhaic-aif.firebasestorage.app",
+  messagingSenderId: "551000131029",
+  appId: "1:551000131029:web:a911ade8fb3efa65c0295c"
 };
 
 
