@@ -977,16 +977,14 @@ startTaskLoopBtn?.addEventListener("click", async () => {
 });
 
 // ===============================
-// Task loop: 24 pairs => 48 trials
+// Task loop: 24 trials (AI suggestion on every trial)
 // ===============================
 const PAIR_IDS = Array.from({ length: 24 }, (_, i) => String(i + 1).padStart(3, "0"));
-const TASK_TRIALS = PAIR_IDS.flatMap((id) => {
+// This version runs *only* AI-suggestion trials (no human-only/baseline trials).
+const TASK_TRIALS = PAIR_IDS.map((id) => {
   const bagSrc = `img/bag_${id}.jpg`;
   const aiSrc = `img/ai_${id}.png`;
-  return [
-    { trialId: `bag_${id}`, pairId: id, condition: "bag", baseImageSrc: bagSrc, suggestionImageSrc: null },
-    { trialId: `ai_${id}`, pairId: id, condition: "ai", baseImageSrc: bagSrc, suggestionImageSrc: aiSrc }
-  ];
+  return { trialId: `ai_${id}`, pairId: id, condition: "ai", baseImageSrc: bagSrc, suggestionImageSrc: aiSrc };
 });
 
 let taskLoopState = null;
