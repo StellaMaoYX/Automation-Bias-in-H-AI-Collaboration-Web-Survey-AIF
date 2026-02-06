@@ -49,6 +49,17 @@ const taskInfo2Div = document.getElementById("taskInfo2");
 const taskDiv = document.getElementById("task");
 const thankyouDiv = document.getElementById("thankyou");
 
+function scrollPageToTop() {
+  // Defer until after the DOM visibility changes have been applied.
+  requestAnimationFrame(() => {
+    try {
+      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    } catch {
+      window.scrollTo(0, 0);
+    }
+  });
+}
+
 // ===============================
 // Task canvases: drag/draw/erase + logging
 // ===============================
@@ -837,6 +848,7 @@ startBtn.addEventListener("click", async () => {
 
   consentDiv.classList.add("hidden");
   surveyDiv.classList.remove("hidden");
+  scrollPageToTop();
 });
 
 // ===============================
@@ -915,6 +927,7 @@ nextBtnD.addEventListener("click", async () => {
   taskInfo1Div.classList.remove("hidden");
   taskInfo2Div.classList.add("hidden");
   taskDiv.classList.add("hidden");
+  scrollPageToTop();
 
   info1Controller.mount();
   await info1Controller.startTrial({
@@ -956,6 +969,7 @@ nextTaskInfo1Btn?.addEventListener("click", async () => {
   taskInfo1Div.classList.add("hidden");
 
   taskInfo2Div.classList.remove("hidden");
+  scrollPageToTop();
   info2Controller.mount();
   await info2Controller.startTrial({
     trialId: "info_2",
@@ -972,6 +986,7 @@ startTaskLoopBtn?.addEventListener("click", async () => {
   taskInfo2Div.classList.add("hidden");
 
   taskDiv.classList.remove("hidden");
+  scrollPageToTop();
   taskController.mount();
   await startTaskLoop();
 });
@@ -1022,6 +1037,8 @@ taskDiv?.addEventListener("change", (e) => {
 async function showTrial(index) {
   const trial = TASK_TRIALS[index];
   if (!trial) return;
+
+  scrollPageToTop();
 
   if (trialTotalEl) trialTotalEl.textContent = String(TASK_TRIALS.length);
   if (trialIndexEl) trialIndexEl.textContent = String(index + 1);
@@ -1177,4 +1194,5 @@ nextTaskBtn?.addEventListener("click", async () => {
   taskController.unmount();
   taskDiv.classList.add("hidden");
   thankyouDiv.classList.remove("hidden");
+  scrollPageToTop();
 });
