@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Research Survey</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 700px;
+      margin: 40px auto;
+      line-height: 1.6;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 18px;
+      font-size: 16px;
+    }
+    button.active-tool {
+      outline: 3px solid #2b6cb0;
+      outline-offset: 2px;
+    }
+    button.ai-suggestion-btn {
+      margin-top: 0;
+      background: #111827;
+      color: #fff;
+      border: 1px solid #0f172a;
+    }
+    button.ai-suggestion-btn:active {
+      filter: brightness(0.92);
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Decision-making with AI Suggestions </h1>
+
+  <!-- Consent -->
+  <div id="consent">
+    <p>
+      *Duration: ~15 minutes*<br><br>
+
+      Description: In this study, you will complete a short visual screening task using X-ray images of luggage. On each trial, you will decide whether a prohibited item is present. You may also see an AI-based aid that provides suggestions during the task (the aid is not always correct). You can use on-screen tools (e.g., zoom, image adjustments) to inspect the images.<br>
+      Your responses and interaction data (e.g., time on each trial, tool usage; optionally mouse movements if enabled) will be recorded for research purposes. No personally identifying information will be collected.<br><br>
+
+      Eligibility: 18+, fluent in English, normal or corrected-to-normal vision, desktop/laptop required<br>
+    </p>
+
+    <p>
+       I have read and understand that: <br>
+       • My responses are anonymous. <br>
+       • I may withdraw at any time without penalty. <br>
+       • The task involves simple decision-making about x-ray security images. <br><br>
+       By checking the boxes below and clicking "Start Survey", I voluntarily agree to participate in this research study.
+    </p>
+
+    <label>
+      <input type="checkbox" id="consentAge" />
+      I am at least 18 years old and voluntarily agree to participate in this research study. <br><br>
+    </label>
+
+    <label>
+      <input type="checkbox" id="consentDevice" />
+      I'm using a desktop/laptop to do this survey.
+    </label>
+
+    <br />
+    <button id="startBtn" disabled>Start Survey</button>
+  </div>
+
+  <!-- Survey -->
+  <div id="survey" class="hidden">
+    <h2>Demographic Information</h2>
+
+    <label>
+      Q1. In which country do you currently reside?
+      <br />
+      <input list="countryList" id="q1" name="q1" autocomplete="off" />
+      <datalist id="countryList">
+      <option value="Afghanistan">
+      <option value="Albania">
+      <option value="Algeria">
+      <option value="Andorra">
+      <option value="Angola">
+      <option value="Antigua and Barbuda">
+      <option value="Argentina">
+      <option value="Armenia">
+      <option value="Australia">
+      <option value="Austria">
+      <option value="Azerbaijan">
+      <option value="Bahamas">
+      <option value="Bahrain">
+      <option value="Bangladesh">
+      <option value="Barbados">
+      <option value="Belarus">
+      <option value="Belgium">
+      <option value="Belize">
+      <option value="Benin">
+      <option value="Bhutan">
+      <option value="Bolivia">
+      <option value="Bosnia and Herzegovina">
+      <option value="Botswana">
+      <option value="Brazil">
+      <option value="Brunei">
+      <option value="Bulgaria">
+      <option value="Burkina Faso">
+      <option value="Burundi">
+      <option value="Cabo Verde">
+      <option value="Cambodia">
+      <option value="Cameroon">
+      <option value="Canada">
+      <option value="Central African Republic">
+      <option value="Chad">
+      <option value="Chile">
+      <option value="China">
+      <option value="Colombia">
+      <option value="Comoros">
+      <option value="Congo">
+      <option value="Costa Rica">
+      <option value="Croatia">
+      <option value="Cuba">
+      <option value="Cyprus">
+      <option value="Czech Republic">
+      <option value="Denmark">
+      <option value="Djibouti">
+      <option value="Dominica">
+      <option value="Dominican Republic">
+      <option value="Ecuador">
+      <option value="Egypt">
+      <option value="El Salvador">
+      <option value="Equatorial Guinea">
+      <option value="Eritrea">
+      <option value="Estonia">
+      <option value="Eswatini">
+      <option value="Ethiopia">
+      <option value="Fiji">
+      <option value="Finland">
+      <option value="France">
+      <option value="Gabon">
+      <option value="Gambia">
+      <option value="Georgia">
+      <option value="Germany">
+      <option value="Ghana">
+      <option value="Greece">
+      <option value="Grenada">
+      <option value="Guatemala">
+      <option value="Guinea">
+      <option value="Guinea-Bissau">
+      <option value="Guyana">
+      <option value="Haiti">
+      <option value="Honduras">
+      <option value="Hungary">
+      <option value="Iceland">
+      <option value="India">
+      <option value="Indonesia">
+      <option value="Iran">
+      <option value="Iraq">
+      <option value="Ireland">
+      <option value="Israel">
+      <option value="Italy">
+      <option value="Jamaica">
+      <option value="Japan">
+      <option value="Jordan">
+      <option value="Kazakhstan">
+      <option value="Kenya">
+      <option value="Kiribati">
+      <option value="Kuwait">
+      <option value="Kyrgyzstan">
+      <option value="Laos">
+      <option value="Latvia">
+      <option value="Lebanon">
+      <option value="Lesotho">
+      <option value="Liberia">
+      <option value="Libya">
+      <option value="Liechtenstein">
+      <option value="Lithuania">
+      <option value="Luxembourg">
+      <option value="Madagascar">
+      <option value="Malawi">
+      <option value="Malaysia">
+      <option value="Maldives">
+      <option value="Mali">
+      <option value="Malta">
+      <option value="Marshall Islands">
+      <option value="Mauritania">
+      <option value="Mauritius">
+      <option value="Mexico">
+      <option value="Micronesia">
+      <option value="Moldova">
+      <option value="Monaco">
+      <option value="Mongolia">
+      <option value="Montenegro">
+      <option value="Morocco">
+      <option value="Mozambique">
+      <option value="Myanmar">
+      <option value="Namibia">
+      <option value="Nauru">
+      <option value="Nepal">
+      <option value="Netherlands">
+      <option value="New Zealand">
+      <option value="Nicaragua">
+      <option value="Niger">
+      <option value="Nigeria">
+      <option value="North Korea">
+      <option value="North Macedonia">
+      <option value="Norway">
+      <option value="Oman">
+      <option value="Pakistan">
+      <option value="Palau">
+      <option value="Panama">
+      <option value="Papua New Guinea">
+      <option value="Paraguay">
+      <option value="Peru">
+      <option value="Philippines">
+      <option value="Poland">
+      <option value="Portugal">
+      <option value="Qatar">
+      <option value="Romania">
+      <option value="Russia">
+      <option value="Rwanda">
+      <option value="Saint Kitts and Nevis">
+      <option value="Saint Lucia">
+      <option value="Saint Vincent and the Grenadines">
+      <option value="Samoa">
+      <option value="San Marino">
+      <option value="Sao Tome and Principe">
+      <option value="Saudi Arabia">
+      <option value="Senegal">
+      <option value="Serbia">
+      <option value="Seychelles">
+      <option value="Sierra Leone">
+      <option value="Singapore">
+      <option value="Slovakia">
+      <option value="Slovenia">
+      <option value="Solomon Islands">
+      <option value="Somalia">
+      <option value="South Africa">
+      <option value="South Korea">
+      <option value="South Sudan">
+      <option value="Spain">
+      <option value="Sri Lanka">
+      <option value="Sudan">
+      <option value="Suriname">
+      <option value="Sweden">
+      <option value="Switzerland">
+      <option value="Syria">
+      <option value="Taiwan">
+      <option value="Tajikistan">
+      <option value="Tanzania">
+      <option value="Thailand">
+      <option value="Timor-Leste">
+      <option value="Togo">
+      <option value="Tonga">
+      <option value="Trinidad and Tobago">
+      <option value="Tunisia">
+      <option value="Turkey">
+      <option value="Turkmenistan">
+      <option value="Tuvalu">
+      <option value="Uganda">
+      <option value="Ukraine">
+      <option value="United Arab Emirates">
+      <option value="United Kingdom">
+      <option value="United States">
+      <option value="Uruguay">
+      <option value="Uzbekistan">
+      <option value="Vanuatu">
+      <option value="Vatican City">
+      <option value="Venezuela">
+      <option value="Vietnam">
+      <option value="Yemen">
+      <option value="Zambia">
+      <option value="Zimbabwe">
+      </datalist>
+    </label>
+
+    <h2>Demographic Information</h2>
+
+    <!-- Age -->
+    <fieldset>
+      <legend>Age</legend>
+      <label><input type="radio" name="age" value="18-24"> 18–24</label><br>
+      <label><input type="radio" name="age" value="25-34"> 25–34</label><br>
+      <label><input type="radio" name="age" value="35-44"> 35–44</label><br>
+      <label><input type="radio" name="age" value="45-54"> 45–54</label><br>
+      <label><input type="radio" name="age" value="55-64"> 55–64</label><br>
+      <label><input type="radio" name="age" value="65+"> 65+</label><br>
+      <label><input type="radio" name="age" value="prefer_not"> Prefer not to say</label>
+    </fieldset>
+
+    <br>
+
+    <!-- Gender -->
+    <fieldset>
+      <legend>Gender</legend>
+      <label><input type="radio" name="gender" value="female"> Female</label><br>
+      <label><input type="radio" name="gender" value="male"> Male</label><br>
+      <label><input type="radio" name="gender" value="nonbinary"> Non-binary / third gender</label><br>
+      <label><input type="radio" name="gender" value="prefer_not"> Prefer not to say</label><br>
+      <label>
+        <input type="radio" name="gender" value="self_describe"> Prefer to self-describe:
+        <input type="text" id="gender_other" placeholder="Please specify" />
+      </label>
+    </fieldset>
+
+    <br>
+
+
+    <!-- Race and Ethnicity (Multiple Selection) -->
+    <fieldset>
+      <legend>Race and Ethnicity (Select all that apply)</legend>
+
+      <label>
+        <input type="checkbox" name="race[]" value="american_indian">
+        American Indian or Alaska Native
+      </label><br>
+
+      <label>
+        <input type="checkbox" name="race[]" value="asian">
+        Asian
+      </label><br>
+
+      <label>
+        <input type="checkbox" name="race[]" value="black">
+        Black or African American
+      </label><br>
+
+      <label>
+        <input type="checkbox" name="race[]" value="hispanic">
+        Hispanic or Latino
+      </label><br>
+
+      <label>
+        <input type="checkbox" name="race[]" value="mena">
+        Middle Eastern or North African
+      </label><br>
+
+      <label>
+        <input type="checkbox" name="race[]" value="pacific_islander">
+        Native Hawaiian or Other Pacific Islander
+      </label><br>
+
+      <label>
+        <input type="checkbox" name="race[]" value="white">
+        White
+      </label><br>
+
+      <label>
+        <input type="checkbox" name="race[]" value="prefer_not">
+        Prefer not to say
+      </label><br>
+
+      <label>
+        <input type="checkbox" name="race[]" value="other">
+        Some other race or ethnicity:
+        <input type="text" name="race_other" placeholder="Please specify">
+      </label>
+    </fieldset>
+
+    <br>
+
+    <!-- Education -->
+    <fieldset>
+      <legend>Highest education level (completed or currently attending)</legend>
+      <label><input type="radio" name="education" value="less_than_hs"> Less than high school</label><br>
+      <label><input type="radio" name="education" value="high_school"> High school or equivalent</label><br>
+      <label><input type="radio" name="education" value="some_college"> Some college (no degree)</label><br>
+      <label><input type="radio" name="education" value="associate"> Associate degree</label><br>
+      <label><input type="radio" name="education" value="bachelor"> Bachelor’s degree</label><br>
+      <label><input type="radio" name="education" value="master"> Master’s degree</label><br>
+      <label><input type="radio" name="education" value="doctoral"> Doctoral degree (PhD, EdD, etc.)</label><br>
+      <label><input type="radio" name="education" value="professional"> Professional degree (MD, JD, etc.)</label><br>
+      <label><input type="radio" name="education" value="prefer_not"> Prefer not to say</label>
+    </fieldset>
+
+    <br>
+
+    <button id="nextBtnD">Next</button>
+  </div>
+  
+  <!-- Human-first Task Info Page 1 -->
+  <div id="taskInfo1" class="hidden">
+    <h2>Task Info</h2>
+    <div id="taskInfo1Desc" style="margin-bottom:16px;">
+      <p>
+        In the next part, you will inspect X-ray images of luggage on a canvas. You can zoom, drag to pan,
+        and use the pen/eraser to mark areas while you decide whether a dangerous item is present.
+        <br><br>
+        After you finish your inspection, click "Next" to proceed to the next image.
+        <br><br>
+        The following two pages demonstrate the tools you can use during the task.
+      </p>
+      <p style="margin-top:10px;">
+        <!-- Leave space for your description -->
+      </p>
+    </div>
+
+    <div style="display:flex; gap:20px;">
+      <!-- Tools -->
+      <div style="min-width:120px;">
+        <button id="zoomInBtnInfo1">Zoom In ➕</button><br><br>
+        <button id="zoomOutBtnInfo1">Zoom Out ➖</button><br><br>
+        <button id="dragBtnInfo1">Drag ✋</button><br><br>
+        <button id="drawBtnInfo1">Draw 🖊️</button><br><br>
+        <button id="eraserBtnInfo1">Eraser 🧽</button>
+      </div>
+
+      <!-- Image Canvas -->
+      <div style="border:2px dashed #aaa; padding:10px;">
+        <canvas id="taskCanvasInfo1" width="500" height="500"
+                style="border:1px solid #ccc; cursor:crosshair;"></canvas>
+      </div>
+    </div>
+
+    <br>
+    <button id="nextTaskInfo1Btn">Next</button>
+  </div>
+
+  <!-- Human-first Task Info Page 2 -->
+  <div id="taskInfo2" class="hidden">
+    <h2>Info</h2>
+    <div id="taskInfo2Desc" style="margin-bottom:16px;">
+      <p>
+        After you enter your initial decision, you will have access to an AI suggestion. Press and hold the button to reveal the AI
+        overlay; release it to return to the original image. You can still use same functions.
+        <br><br>
+        Remind: the AI is not always correct.
+      </p>
+      <p style="margin-top:10px;">
+        <!-- Leave space for your description -->
+      </p>
+    </div>
+
+    <div style="display:flex; justify-content:flex-start; margin-bottom:10px;">
+      <button id="aiSuggestionBtnInfo2" class="ai-suggestion-btn">AI Suggestion (Hold)</button>
+    </div>
+
+    <div style="display:flex; gap:20px;">
+      <!-- Tools -->
+      <div style="min-width:120px;">
+        <button id="zoomInBtnInfo2">Zoom In ➕</button><br><br>
+        <button id="zoomOutBtnInfo2">Zoom Out ➖</button><br><br>
+        <button id="dragBtnInfo2">Drag ✋</button><br><br>
+        <button id="drawBtnInfo2">Draw 🖊️</button><br><br>
+        <button id="eraserBtnInfo2">Eraser 🧽</button>
+      </div>
+
+      <!-- Image Canvas -->
+      <div style="border:2px dashed #aaa; padding:10px;">
+        <canvas id="taskCanvasInfo2" width="500" height="500"
+                style="border:1px solid #ccc; cursor:crosshair;"></canvas>
+      </div>
+    </div>
+
+    <br>
+    <button id="startTaskLoopBtn">Start Task</button>
+  </div>
+
+  <!-- Task Page (Loop) -->
+  <div id="task" class="hidden">
+    <h2>Luggage Inspection Task</h2>
+    <div id="trialMeta" style="margin-bottom:10px; color:#555;">
+      Trial <span id="trialIndex">1</span> / <span id="trialTotal">48</span>
+    </div>
+
+    <div style="display:flex; justify-content:flex-start; margin-bottom:10px;">
+      <button id="aiSuggestionBtn" class="ai-suggestion-btn" style="display:none;">
+        AI Suggestion (Hold)
+      </button>
+    </div>
+
+    <div style="display:flex; gap:20px;">
+      <!-- Tools -->
+      <div style="min-width:120px;">
+        <button id="zoomInBtn">Zoom In ➕</button><br><br>
+        <button id="zoomOutBtn">Zoom Out ➖</button><br><br>
+        <button id="dragBtn">Drag ✋</button><br><br>
+        <button id="drawBtn">Draw 🖊️</button><br><br>
+        <button id="eraserBtn">Eraser 🧽</button>
+      </div>
+
+      <!-- Image Canvas -->
+      <div style="border:2px dashed #aaa; padding:10px;">
+        <canvas id="taskCanvas" width="500" height="500"
+                style="border:1px solid #ccc; cursor:crosshair;"></canvas>
+      </div>
+    </div>
+
+    <br>
+
+    <div>
+      <p><strong id="dangerPrompt">Do you think there is a dangerous item?</strong></p>
+      <label><input type="radio" name="danger" value="yes"> Yes</label><br>
+      <label><input type="radio" name="danger" value="no"> No</label>
+    </div>
+
+    <br>
+    <button id="nextTaskBtn" disabled>Next</button>
+  </div>
+
+  
+  <!-- Thank You -->
+  <div id="thankyou" class="hidden">
+    <h2>Thank you!</h2>
+    <p>Your responses have been recorded.</p>
+  </div>
+
+  <script type="module" src="main.js"></script>
+</body>
+</html>
