@@ -459,7 +459,7 @@ function createTaskCanvasController({
     if (!isImagePointInside(imgPt.x, imgPt.y)) return false;
 
     const now = Date.now();
-    const width = tool === "erase" ? 5 : 2;
+    const width = tool === "erase" ? 15 : 2;
     const alpha = tool === "erase" ? 1 : 0.8;
 
     strokeSession = {
